@@ -1,0 +1,27 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Tag_Manager.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="defaultIP" Type="System.String" Scope="User">
+      <Value Profile="(Default)">10.88.7.130</Value>
+    </Setting>
+    <Setting Name="defaultRack" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="defaultSlot" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0</Value>
+    </Setting>
+    <Setting Name="defaultPath" Type="System.String" Scope="User">
+      <Value Profile="(Default)">1,0</Value>
+    </Setting>
+    <Setting Name="defaultController" Type="System.String" Scope="User">
+      <Value Profile="(Default)">ControlLogix</Value>
+    </Setting>
+    <Setting Name="defaultComm" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Allen-Bradley EthernetIP</Value>
+    </Setting>
+    <Setting Name="lastTagEntered" Type="System.String" Scope="User">
+      <Value Profile="(Default)">Test_1D_DINTS</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
