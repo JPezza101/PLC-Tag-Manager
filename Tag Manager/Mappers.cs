@@ -121,15 +121,31 @@ namespace Tag_Manager
                     return tagString.Read().ToString();
 
                 default:
-                    return "Not Working";
+                    return "TYPE NOT FOUND";
             }
         }
 
-        public static TagInfo[] ReadTagInfo()
+        public static TagInfo[] ReadControllerTagInfo()
         {
             var tags = new Tag<TagInfoPlcMapper, TagInfo[]>()
             {
                 Name = "@tags",
+                Gateway = Form1.ipConfig.Gateway,
+                Path = Form1.ipConfig.Path,
+                PlcType = (PlcType)Enum.Parse(typeof(PlcType), Form1.ipConfig.CpuType),
+                Protocol = (Protocol)Enum.Parse(typeof(Protocol), Form1.ipConfig.CommType),
+                Timeout = TimeSpan.FromSeconds(5)
+            };
+
+            var info = tags.Read();
+            return info;
+        }
+
+        public static TagInfo[] ReadProgramTagInfo(string progName)
+        {
+            var tags = new Tag<TagInfoPlcMapper, TagInfo[]>()
+            {
+                Name = $"{progName}.@tags",
                 Gateway = Form1.ipConfig.Gateway,
                 Path = Form1.ipConfig.Path,
                 PlcType = (PlcType)Enum.Parse(typeof(PlcType), Form1.ipConfig.CpuType),

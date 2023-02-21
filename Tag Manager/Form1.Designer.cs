@@ -36,6 +36,7 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createTagListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.csvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -74,13 +75,19 @@
             this.btnWriteChanges = new System.Windows.Forms.Button();
             this.btnCancelChanges = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.dataSet1 = new Tag_Manager.DataSet1();
+            this.dataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new Tag_Manager.DataSet1();
+            this.dataSet1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataTable1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -150,6 +157,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createTagListToolStripMenuItem,
             this.exportToolStripMenuItem,
             this.exportToCSVToolStripMenuItem,
             this.exitToolStripMenuItem});
@@ -157,10 +165,17 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // createTagListToolStripMenuItem
+            // 
+            this.createTagListToolStripMenuItem.Name = "createTagListToolStripMenuItem";
+            this.createTagListToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
+            this.createTagListToolStripMenuItem.Text = "View Tag List";
+            this.createTagListToolStripMenuItem.Click += new System.EventHandler(this.createTagListToolStripMenuItem_Click);
+            // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.exportToolStripMenuItem.Text = "Clear Data";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -170,27 +185,27 @@
             this.csvToolStripMenuItem,
             this.xlsxToolStripMenuItem});
             this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
-            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.exportToCSVToolStripMenuItem.Text = "Export to...";
             // 
             // csvToolStripMenuItem
             // 
             this.csvToolStripMenuItem.Name = "csvToolStripMenuItem";
-            this.csvToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.csvToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.csvToolStripMenuItem.Text = ".csv";
             this.csvToolStripMenuItem.Click += new System.EventHandler(this.csvToolStripMenuItem_Click);
             // 
             // xlsxToolStripMenuItem
             // 
             this.xlsxToolStripMenuItem.Name = "xlsxToolStripMenuItem";
-            this.xlsxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xlsxToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.xlsxToolStripMenuItem.Text = ".xlsx";
             this.xlsxToolStripMenuItem.Click += new System.EventHandler(this.xlsxToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -265,7 +280,7 @@
             // aboutToolStripMenuItem1
             // 
             this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
             this.aboutToolStripMenuItem1.Text = "About";
             // 
             // ddlControllerType
@@ -514,15 +529,30 @@
             this.btnCancelChanges.UseVisualStyleBackColor = true;
             this.btnCancelChanges.Click += new System.EventHandler(this.btnCancelChanges_Click);
             // 
-            // dataSet1
+            // dataTable1BindingSource
             // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            this.dataTable1BindingSource.DataMember = "DataTable1";
+            this.dataTable1BindingSource.DataSource = this.dataSet1BindingSource;
             // 
             // dataSet1BindingSource
             // 
             this.dataSet1BindingSource.DataSource = this.dataSet1;
             this.dataSet1BindingSource.Position = 0;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataSet1BindingSource1
+            // 
+            this.dataSet1BindingSource1.DataSource = this.dataSet1;
+            this.dataSet1BindingSource1.Position = 0;
+            // 
+            // dataTable1BindingSource1
+            // 
+            this.dataTable1BindingSource1.DataMember = "DataTable1";
+            this.dataTable1BindingSource1.DataSource = this.dataSet1;
             // 
             // Form1
             // 
@@ -563,6 +593,7 @@
             this.Controls.Add(this.txtRackNum);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label3);
+            this.MinimumSize = new System.Drawing.Size(885, 350);
             this.Name = "Form1";
             this.Text = "TAG MASTER 5000";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
@@ -571,8 +602,11 @@
             ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -607,7 +641,6 @@
         private System.Windows.Forms.BindingSource iPBindingSource;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Button btnReadTags;
-        private System.Windows.Forms.TextBox inputTagName;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.Label txtIPAddr;
         private System.Windows.Forms.TextBox inputIPAddr;
@@ -627,6 +660,11 @@
         private System.Windows.Forms.ToolTip toolTip1;
         private DataSet1 dataSet1;
         private System.Windows.Forms.BindingSource dataSet1BindingSource;
+        private System.Windows.Forms.ToolStripMenuItem createTagListToolStripMenuItem;
+        public System.Windows.Forms.TextBox inputTagName;
+        private System.Windows.Forms.BindingSource dataTable1BindingSource;
+        private System.Windows.Forms.BindingSource dataSet1BindingSource1;
+        private System.Windows.Forms.BindingSource dataTable1BindingSource1;
     }
 }
 

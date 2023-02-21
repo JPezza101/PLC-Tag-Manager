@@ -11,6 +11,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using Krypton.Toolkit;
+using Krypton.Toolkit.Suite.Extended.TreeGridView;
 
 namespace Tag_Manager
 {
@@ -18,7 +20,8 @@ namespace Tag_Manager
     {
         static public IP ipConfig = new IP();
 
-        string enteredTagName;
+        public string enteredTagName;
+        List<string> programTagNames = new List<string>();
         bool tagIsUdt;
         int rawTypeID;
         string udtTagType;
@@ -38,7 +41,7 @@ namespace Tag_Manager
             InitializeComponent();
         }
 
-        //FUNCTIONS
+        //MAIN FUNCTIONS
         private void WriteTagData()
         {
             //If the first index is > than zero, this is at least a 1D array
@@ -285,29 +288,43 @@ namespace Tag_Manager
                 }
             }
             
-            return "Unknown";
+            return "COULD NOT READ TAG";
         }
 
         private void PrintTagInfo()
         {
             //Store list of all tags
-            var findTag = Mappers.ReadTagInfo();
+            var findTag = Mappers.ReadControllerTagInfo();
 
             foreach (var tag in findTag)
             {
-                tagList.Add(tag);
+                if (!tag.Name.Contains("Program:"))
+                {
+                    tagList.Add(tag);
+                }
+                else
+                {
+                    var findProgramTag = Mappers.ReadProgramTagInfo(tag.Name);
+
+                    foreach (var progTag in findProgramTag)
+                    {
+                        progTag.Name = tag.Name + '.' + progTag.Name;
+                        tagList.Add(progTag);
+                    }
+                }
             }
 
             //For each tag in the list, check the name vs. the user-entered name
-            for (int i = 0; i < findTag.Length; i++)
+            for (int i = 0; i < tagList.Count; i++)
             {
-                if (findTag[i].Name.ToLower() == enteredTagName.ToLower())
+                //tagIsProgramTag = enteredTagName.Contains("Program:");
+                if (tagList[i].Name.ToLower() == enteredTagName.ToLower())
                 {
-                    rawTypeID = Convert.ToInt32(findTag[i].Type);
+                    rawTypeID = Convert.ToInt32(tagList[i].Type);
                     int countBuffer = 0;
 
                     //Store an array of the tag's array dimensions - [X,Y,Z]
-                    foreach (var value in findTag[i].Dimensions)
+                    foreach (var value in tagList[i].Dimensions)
                     {
                         arrayDims[countBuffer] = Convert.ToInt32(value);
                         countBuffer++;
@@ -324,7 +341,7 @@ namespace Tag_Manager
                     else
                     {
                         atomicTagType = GetTypeString(rawTypeID).Item1;
-                        txtTagType.Text = atomicTagType;                        
+                        txtTagType.Text = atomicTagType;
                     }
                 }
             }
@@ -371,8 +388,10 @@ namespace Tag_Manager
                         udtMemberNamesList.Add(name);
                         udtMemberTypesList.Add(type);
 
-                        //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = $"{name} ({type})", SortMode = DataGridViewColumnSortMode.NotSortable });
-                        dt.Columns.Add(new DataColumn($"{name} ({type})"));
+                        //Testing TreeGridView
+                        //dt.Columns.Add(new DataColumn($"{name} ({type})"));
+                        dt.Columns.Add($"{name} ({type})");
+                        
                     }
                 }
             }
@@ -381,8 +400,9 @@ namespace Tag_Manager
             else
             {
                 string type = GetTypeString(rawTypeID).Item1;
-                //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = $"Value ({type})", SortMode = DataGridViewColumnSortMode.NotSortable });
-                dt.Columns.Add(new DataColumn($"Value ({type})"));
+                ////Testing TreeGridView
+                //dt.Columns.Add(new DataColumn($"Value ({type})"));
+                dt.Columns.Add($"Value ({type})");
             }
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
@@ -491,6 +511,11 @@ namespace Tag_Manager
             }
 
             return ((arraySize + type), type);
+        }
+
+        internal void populateFormSelectedTag()
+        {
+            inputTagName.Text = enteredTagName;
         }
 
 
@@ -604,6 +629,7 @@ namespace Tag_Manager
 
 
         //CONTROL EVENTS
+        //Form Events
         private void Form1_Load(object sender, EventArgs e)
         {
             RestoreDefaultComm();
@@ -620,7 +646,10 @@ namespace Tag_Manager
             inputTagName.Text = Properties.Settings.Default.lastTagEntered;
             enteredTagName = inputTagName.Text;
 
+            dt.Columns.Add("Tag Name");
+
             this.dataGridView1.DataSource = dt;
+            kryptonTreeGridView1.DataSource = dt;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -629,6 +658,19 @@ namespace Tag_Manager
             if (confirmAppClose == DialogResult.No)
             {
                 e.Cancel = true;
+            }
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var clearAll = MessageBox.Show("Are you sure you wish to clear all data from this list?\nThis action cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (clearAll == DialogResult.Yes)
+            {
+                udtMemberNamesList.Clear();
+                udtMemberTypesList.Clear();
+                tagList.Clear();
+                dt.Columns.Clear();
+                dt.Clear();
             }
         }
 
@@ -716,6 +758,7 @@ namespace Tag_Manager
             this.Close();
         }
 
+        //Input Events
         private void inputTagName_Leave(object sender, EventArgs e)
         {
             enteredTagName = inputTagName.Text;
@@ -785,7 +828,8 @@ namespace Tag_Manager
                 MessageBox.Show("Default communication configuration restored!", "Restored", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-
+        
+        //Data Grid Events
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             dataGridView1.CurrentCell.Style.BackColor = Color.Yellow;
@@ -809,19 +853,6 @@ namespace Tag_Manager
             btnCancelChanges.Enabled = false;
         }
 
-        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var clearAll = MessageBox.Show("Are you sure you wish to clear all data from this list?\nThis action cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-            if (clearAll == DialogResult.Yes)
-            {
-                udtMemberNamesList.Clear();
-                udtMemberTypesList.Clear();
-                tagList.Clear();
-                dt.Columns.Clear();
-                dt.Clear();
-            }
-        }
-
         private void btnReadTags_Click(object sender, EventArgs e)
         {
             //Clear all lists with every new Read request
@@ -836,6 +867,13 @@ namespace Tag_Manager
             WriteTagData();
 
             dt.AcceptChanges();
+            kryptonTreeGridView1.Refresh();
+        }
+
+        private void createTagListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2(this);
+            f.Show();
         }
     }
 }
