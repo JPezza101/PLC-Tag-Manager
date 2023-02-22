@@ -74,5 +74,12 @@ namespace Tag_Manager
             mainForm.populateFormSelectedTag();
             this.Close();
         }
+
+        private void treeView1_DoubleClick(object sender, EventArgs e)
+        {
+            mainForm.enteredTagName = treeView1.SelectedNode.Text;
+            mainForm.populateFormSelectedTag();
+            this.Close();
+        }
     }
 }

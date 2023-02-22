@@ -1,4 +1,5 @@
-﻿using libplctag.DataTypes;
+﻿using libplctag;
+using libplctag.DataTypes;
 using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
@@ -11,8 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
-using Krypton.Toolkit;
-using Krypton.Toolkit.Suite.Extended.TreeGridView;
+using System.Diagnostics;
 
 namespace Tag_Manager
 {
@@ -41,7 +41,7 @@ namespace Tag_Manager
             InitializeComponent();
         }
 
-        //MAIN FUNCTIONS
+        //GRID POPULATE FUNCTIONS
         private void WriteTagData()
         {
             //If the first index is > than zero, this is at least a 1D array
@@ -75,7 +75,6 @@ namespace Tag_Manager
                                             data.Add(ReadSingleTag(enteredTagName, i, j, k, member));
                                         }
                                     }
-                                    //dataGridView1.Rows.Add(data.ToArray());
                                     dt.Rows.Add(data.ToArray());
                                 }
                             }
@@ -103,7 +102,6 @@ namespace Tag_Manager
                                         data.Add(ReadSingleTag(enteredTagName, i, j, 0, member));
                                     }
                                 }
-                                //dataGridView1.Rows.Add(data.ToArray());
                                 dt.Rows.Add(data.ToArray());
                             }
                         }
@@ -129,7 +127,6 @@ namespace Tag_Manager
                                 data.Add(ReadSingleTag(enteredTagName, i, 0, 0, member));
                             }
                         }
-                        //dataGridView1.Rows.Add(data.ToArray());
                         dt.Rows.Add(data.ToArray());
                     }
                 }
@@ -152,7 +149,6 @@ namespace Tag_Manager
                         data.Add(ReadSingleTag(enteredTagName, 0, 0, 0, member));
                     }
                 }
-                //dataGridView1.Rows.Add(data.ToArray());
                 dt.Rows.Add(data.ToArray());
             }
         }
@@ -369,7 +365,6 @@ namespace Tag_Manager
         private void WriteColumnHeaders()
         {
             //First column is always a list of the tag names in order
-            //dataGridView1.Columns.Add(new DataGridViewTextBoxColumn() { HeaderText = "Tag Name", ReadOnly = true, SortMode = DataGridViewColumnSortMode.NotSortable });
             dt.Columns.Add(new DataColumn("Tag Name"));
             dt.Columns[0].ReadOnly = true;
 
@@ -384,13 +379,11 @@ namespace Tag_Manager
                     if (!member.Name.Contains("ZZZZZZZZZZ"))
                     {
                         string name = member.Name;
-                        string type = GetTypeString(member.Type).Item1;
+                        string type = GetTypeString(member.Type).Item2;
                         udtMemberNamesList.Add(name);
                         udtMemberTypesList.Add(type);
 
-                        //Testing TreeGridView
-                        //dt.Columns.Add(new DataColumn($"{name} ({type})"));
-                        dt.Columns.Add($"{name} ({type})");
+                        dt.Columns.Add(new DataColumn($"{name} ({type})"));
                         
                     }
                 }
@@ -399,10 +392,8 @@ namespace Tag_Manager
             //If tag is NOT UDT, write a single column with the header "Value (TYPE)"
             else
             {
-                string type = GetTypeString(rawTypeID).Item1;
-                ////Testing TreeGridView
-                //dt.Columns.Add(new DataColumn($"Value ({type})"));
-                dt.Columns.Add($"Value ({type})");
+                string type = GetTypeString(rawTypeID).Item2;
+                dt.Columns.Add(new DataColumn($"Value ({type})"));
             }
 
             foreach (DataGridViewColumn col in dataGridView1.Columns)
@@ -646,10 +637,7 @@ namespace Tag_Manager
             inputTagName.Text = Properties.Settings.Default.lastTagEntered;
             enteredTagName = inputTagName.Text;
 
-            dt.Columns.Add("Tag Name");
-
             this.dataGridView1.DataSource = dt;
-            kryptonTreeGridView1.DataSource = dt;
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
@@ -663,7 +651,7 @@ namespace Tag_Manager
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var clearAll = MessageBox.Show("Are you sure you wish to clear all data from this list?\nThis action cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var clearAll = MessageBox.Show("Are you sure you wish to clear all data from this list?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (clearAll == DialogResult.Yes)
             {
                 udtMemberNamesList.Clear();
@@ -706,7 +694,7 @@ namespace Tag_Manager
                     ws.Columns.AutoFit();
                     wb.SaveAs(sfd.FileName, XlFileFormat.xlWorkbookDefault, Type.Missing, Type.Missing, false, false, XlSaveAsAccessMode.xlNoChange, XlSaveConflictResolution.xlLocalSessionChanges, Type.Missing, Type.Missing);
                     app.Quit();
-                    MessageBox.Show("Export Complete!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Export Complete!", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -748,7 +736,7 @@ namespace Tag_Manager
                             }
                         }
                     }
-                    MessageBox.Show("Export Complete!", "", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    MessageBox.Show("Export Complete!", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
@@ -758,7 +746,22 @@ namespace Tag_Manager
             this.Close();
         }
 
+        private void githubToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://github.com/JPezza101/PLC-Tag-Manager");
+        }
+
+
         //Input Events
+
+        private void Enter_KeyDown(object sender, KeyEventArgs e)
+        {
+            //Allows the use of the [ENTER] key to tab down the list of text fields
+            if (e.KeyCode == Keys.Enter)
+            {
+                SendKeys.Send("{TAB}");
+            }
+        }
         private void inputTagName_Leave(object sender, EventArgs e)
         {
             enteredTagName = inputTagName.Text;
@@ -816,41 +819,63 @@ namespace Tag_Manager
 
         private void btnSetDefaultIP_Click(object sender, EventArgs e)
         {
-
+            var confirmSet = MessageBox.Show("Are you sure you wish to set your current communication settings as the default configuration?\n\nThis will erase all previous default settings.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (confirmSet == DialogResult.Yes)
+            {
+                SetDefaultComm();
+                MessageBox.Show("Default communication settings saved!", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         private void btnRestoreDefaultIP_Click(object sender, EventArgs e)
         {
-            var confirmRestore = MessageBox.Show("Are you sure you wish to restore your communication settings to the default configuration?\n\nThis will erase all of your current communication settings and cannot be undone.", "Warning", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            var confirmRestore = MessageBox.Show("Are you sure you wish to restore your communication settings to the default configuration?\n\nThis will erase all current communication settings.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (confirmRestore == DialogResult.Yes)
             {
                 RestoreDefaultComm();
-                MessageBox.Show("Default communication configuration restored!", "Restored", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Default communication settings restored!", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        
+
+        private void btnDefaultTag_Click(object sender, EventArgs e)
+        {
+            Properties.Settings.Default.lastTagEntered = inputTagName.Text;
+            Properties.Settings.Default.Save();
+            var confirmDefaultTag = MessageBox.Show("Default tag saved!", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+
         //Data Grid Events
         private void dataGridView1_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             dataGridView1.CurrentCell.Style.BackColor = Color.Yellow;
             tagDataChanges.Add(new string[]{(dataGridView1.CurrentCell.Value.ToString()),(dataGridView1.Columns[dataGridView1.CurrentCell.ColumnIndex].HeaderText), (dataGridView1.CurrentRow.Cells[0].Value.ToString()) });
 
+            //listBox1.Items.Add(string.Join(", ", tagDataChanges[tagDataChanges.Count - 1]));
+
             btnCancelChanges.Enabled = true;
+            btnWriteChanges.Enabled = true;
         }
 
         private void btnCancelChanges_Click(object sender, EventArgs e)
         {
-            dt.RejectChanges();
-            tagDataChanges.Clear();
-            foreach (DataGridViewRow row in dataGridView1.Rows)
-            {
-                foreach (DataGridViewCell cell in row.Cells)
-                {
-                    cell.Style.BackColor = Color.Empty;
-                }
-            }
+            var cancelChanges = MessageBox.Show("This will remove all uncommitted changes that have been made and cannot be undone.\nDo you wish to continue?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
 
-            btnCancelChanges.Enabled = false;
+            if (cancelChanges == DialogResult.Yes)
+            {
+                dt.RejectChanges();
+                tagDataChanges.Clear();
+                foreach (DataGridViewRow row in dataGridView1.Rows)
+                {
+                    foreach (DataGridViewCell cell in row.Cells)
+                    {
+                        cell.Style.BackColor = Color.Empty;
+                    }
+                }
+
+                btnCancelChanges.Enabled = false;
+            }
+            
         }
 
         private void btnReadTags_Click(object sender, EventArgs e)
@@ -867,13 +892,57 @@ namespace Tag_Manager
             WriteTagData();
 
             dt.AcceptChanges();
-            kryptonTreeGridView1.Refresh();
         }
 
         private void createTagListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form2 f = new Form2(this);
             f.Show();
+        }
+
+        private void btnWriteChanges_Click(object sender, EventArgs e)
+        {
+            var writeCheck = MessageBox.Show("Are you sure you wish to write this new data to the PLC?\nThis cannot be undone.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (writeCheck == DialogResult.Yes)
+            {
+                if (!tagIsUdt)
+                {
+                    foreach (var change in tagDataChanges)
+                    {
+                        string name = change[2];
+                        string type = change[1].Substring(change[1].IndexOf('(') + 1, (change[1].Length - change[1].IndexOf("(") - 2));
+                        string data = change[0];
+
+                        //listBox1.Items.Add($"{data}, {type}, {name}");
+
+                        Mappers.WriteSingleTagData(name, type, data);
+                    }
+                }
+                else
+                {
+                    foreach (var change in tagDataChanges)
+                    {
+                        string name = change[2] + "." + change[1].Substring(0, change[1].IndexOf(' '));
+                        string type = change[1].Substring(change[1].IndexOf('(') + 1, change[1].Length - change[1].IndexOf('(') - 2);
+                        string data = change[0];
+
+                        //listBox1.Items.Add($"{data}, {type}, {name}");
+
+                        Mappers.WriteSingleTagData(name, type, data);
+                    }
+                }
+
+                dt.AcceptChanges();
+                tagDataChanges.Clear();
+                btnCancelChanges.Enabled = false;
+                btnWriteChanges.Enabled = false;
+                MessageBox.Show("New tag data successfully written!", "Complete", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+        }
+
+        private void btnReadTags_KeyDown(object sender, KeyEventArgs e)
+        {
+            btnReadTags_Click(sender, e);
         }
     }
 }

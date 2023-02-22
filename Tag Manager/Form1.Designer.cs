@@ -80,6 +80,7 @@
             this.dataSet1 = new Tag_Manager.DataSet1();
             this.dataSet1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataTable1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btnDefaultTag = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -112,6 +113,7 @@
             this.txtTagDim3.ReadOnly = true;
             this.txtTagDim3.Size = new System.Drawing.Size(34, 20);
             this.txtTagDim3.TabIndex = 43;
+            this.txtTagDim3.TabStop = false;
             // 
             // txtTagDim1
             // 
@@ -120,6 +122,7 @@
             this.txtTagDim1.ReadOnly = true;
             this.txtTagDim1.Size = new System.Drawing.Size(34, 20);
             this.txtTagDim1.TabIndex = 41;
+            this.txtTagDim1.TabStop = false;
             // 
             // label3
             // 
@@ -216,6 +219,7 @@
             this.txtTagType.ReadOnly = true;
             this.txtTagType.Size = new System.Drawing.Size(154, 20);
             this.txtTagType.TabIndex = 45;
+            this.txtTagType.TabStop = false;
             // 
             // txtTagDim2
             // 
@@ -224,6 +228,7 @@
             this.txtTagDim2.ReadOnly = true;
             this.txtTagDim2.Size = new System.Drawing.Size(34, 20);
             this.txtTagDim2.TabIndex = 42;
+            this.txtTagDim2.TabStop = false;
             // 
             // label1
             // 
@@ -245,7 +250,7 @@
             this.btnRestoreDefaultIP.Size = new System.Drawing.Size(125, 51);
             this.btnRestoreDefaultIP.TabIndex = 65;
             this.btnRestoreDefaultIP.TabStop = false;
-            this.btnRestoreDefaultIP.Text = "Restore Defaults";
+            this.btnRestoreDefaultIP.Text = "Restore Default\r\nComm Settings\r\n";
             this.btnRestoreDefaultIP.UseVisualStyleBackColor = true;
             this.btnRestoreDefaultIP.Click += new System.EventHandler(this.btnRestoreDefaultIP_Click);
             // 
@@ -258,7 +263,7 @@
             this.btnSetDefaultIP.Size = new System.Drawing.Size(125, 51);
             this.btnSetDefaultIP.TabIndex = 64;
             this.btnSetDefaultIP.TabStop = false;
-            this.btnSetDefaultIP.Text = "Set Defaults";
+            this.btnSetDefaultIP.Text = "Set Default\r\nComm Settings";
             this.btnSetDefaultIP.UseVisualStyleBackColor = true;
             this.btnSetDefaultIP.Click += new System.EventHandler(this.btnSetDefaultIP_Click);
             // 
@@ -276,6 +281,7 @@
             this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
             this.githubToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
             this.githubToolStripMenuItem.Text = "GitHub";
+            this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
             // 
             // aboutToolStripMenuItem1
             // 
@@ -299,8 +305,9 @@
             this.ddlControllerType.Location = new System.Drawing.Point(438, 37);
             this.ddlControllerType.Name = "ddlControllerType";
             this.ddlControllerType.Size = new System.Drawing.Size(154, 21);
-            this.ddlControllerType.TabIndex = 56;
+            this.ddlControllerType.TabIndex = 4;
             this.ddlControllerType.SelectedIndexChanged += new System.EventHandler(this.ddlControllerType_SelectedIndexChanged);
+            this.ddlControllerType.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             // 
             // label9
             // 
@@ -350,17 +357,19 @@
             this.btnReadTags.Location = new System.Drawing.Point(1089, 103);
             this.btnReadTags.Name = "btnReadTags";
             this.btnReadTags.Size = new System.Drawing.Size(125, 51);
-            this.btnReadTags.TabIndex = 44;
+            this.btnReadTags.TabIndex = 7;
             this.btnReadTags.Text = "Read Tags";
             this.btnReadTags.UseVisualStyleBackColor = true;
             this.btnReadTags.Click += new System.EventHandler(this.btnReadTags_Click);
+            this.btnReadTags.KeyDown += new System.Windows.Forms.KeyEventHandler(this.btnReadTags_KeyDown);
             // 
             // inputTagName
             // 
             this.inputTagName.Location = new System.Drawing.Point(98, 103);
             this.inputTagName.Name = "inputTagName";
             this.inputTagName.Size = new System.Drawing.Size(494, 20);
-            this.inputTagName.TabIndex = 39;
+            this.inputTagName.TabIndex = 6;
+            this.inputTagName.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             this.inputTagName.Leave += new System.EventHandler(this.inputTagName_Leave);
             // 
             // menuStrip1
@@ -390,8 +399,9 @@
             this.inputIPAddr.Location = new System.Drawing.Point(98, 37);
             this.inputIPAddr.Name = "inputIPAddr";
             this.inputIPAddr.Size = new System.Drawing.Size(208, 20);
-            this.inputIPAddr.TabIndex = 48;
+            this.inputIPAddr.TabIndex = 1;
             this.inputIPAddr.TextChanged += new System.EventHandler(this.inputIPAddr_TextChanged);
+            this.inputIPAddr.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             this.inputIPAddr.Leave += new System.EventHandler(this.inputIPAddr_Leave);
             // 
             // panIPAddr
@@ -412,8 +422,9 @@
             this.ddlCommProtocol.Location = new System.Drawing.Point(438, 66);
             this.ddlCommProtocol.Name = "ddlCommProtocol";
             this.ddlCommProtocol.Size = new System.Drawing.Size(154, 21);
-            this.ddlCommProtocol.TabIndex = 58;
+            this.ddlCommProtocol.TabIndex = 5;
             this.ddlCommProtocol.SelectedIndexChanged += new System.EventHandler(this.ddlCommProtocol_SelectedIndexChanged);
+            this.ddlCommProtocol.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             // 
             // inputSlotNum
             // 
@@ -421,9 +432,10 @@
             this.inputSlotNum.Location = new System.Drawing.Point(270, 66);
             this.inputSlotNum.Name = "inputSlotNum";
             this.inputSlotNum.Size = new System.Drawing.Size(36, 20);
-            this.inputSlotNum.TabIndex = 54;
+            this.inputSlotNum.TabIndex = 3;
             this.inputSlotNum.Text = "0";
             this.inputSlotNum.TextChanged += new System.EventHandler(this.inputSlotNum_TextChanged);
+            this.inputSlotNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             this.inputSlotNum.Leave += new System.EventHandler(this.inputSlotNum_Leave);
             // 
             // inputRackNum
@@ -432,9 +444,10 @@
             this.inputRackNum.Location = new System.Drawing.Point(98, 66);
             this.inputRackNum.Name = "inputRackNum";
             this.inputRackNum.Size = new System.Drawing.Size(36, 20);
-            this.inputRackNum.TabIndex = 50;
+            this.inputRackNum.TabIndex = 2;
             this.inputRackNum.Text = "1";
             this.inputRackNum.TextChanged += new System.EventHandler(this.inputRackNum_TextChanged);
+            this.inputRackNum.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Enter_KeyDown);
             this.inputRackNum.Leave += new System.EventHandler(this.inputRackNum_Leave);
             // 
             // panRackNum
@@ -512,9 +525,11 @@
             this.btnWriteChanges.Location = new System.Drawing.Point(1089, 589);
             this.btnWriteChanges.Name = "btnWriteChanges";
             this.btnWriteChanges.Size = new System.Drawing.Size(125, 51);
-            this.btnWriteChanges.TabIndex = 71;
+            this.btnWriteChanges.TabIndex = 68;
+            this.btnWriteChanges.TabStop = false;
             this.btnWriteChanges.Text = "Write Changes";
             this.btnWriteChanges.UseVisualStyleBackColor = true;
+            this.btnWriteChanges.Click += new System.EventHandler(this.btnWriteChanges_Click);
             // 
             // btnCancelChanges
             // 
@@ -524,7 +539,8 @@
             this.btnCancelChanges.Location = new System.Drawing.Point(1089, 177);
             this.btnCancelChanges.Name = "btnCancelChanges";
             this.btnCancelChanges.Size = new System.Drawing.Size(125, 51);
-            this.btnCancelChanges.TabIndex = 73;
+            this.btnCancelChanges.TabIndex = 67;
+            this.btnCancelChanges.TabStop = false;
             this.btnCancelChanges.Text = "Cancel Changes";
             this.btnCancelChanges.UseVisualStyleBackColor = true;
             this.btnCancelChanges.Click += new System.EventHandler(this.btnCancelChanges_Click);
@@ -554,11 +570,25 @@
             this.dataTable1BindingSource1.DataMember = "DataTable1";
             this.dataTable1BindingSource1.DataSource = this.dataSet1;
             // 
+            // btnDefaultTag
+            // 
+            this.btnDefaultTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnDefaultTag.Font = new System.Drawing.Font("Segoe UI", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDefaultTag.Location = new System.Drawing.Point(958, 103);
+            this.btnDefaultTag.Name = "btnDefaultTag";
+            this.btnDefaultTag.Size = new System.Drawing.Size(125, 51);
+            this.btnDefaultTag.TabIndex = 66;
+            this.btnDefaultTag.TabStop = false;
+            this.btnDefaultTag.Text = "Set Default Tag";
+            this.btnDefaultTag.UseVisualStyleBackColor = true;
+            this.btnDefaultTag.Click += new System.EventHandler(this.btnDefaultTag_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1226, 646);
+            this.Controls.Add(this.btnDefaultTag);
             this.Controls.Add(this.btnCancelChanges);
             this.Controls.Add(this.btnWriteChanges);
             this.Controls.Add(this.dataGridView1);
@@ -665,6 +695,7 @@
         private System.Windows.Forms.BindingSource dataTable1BindingSource;
         private System.Windows.Forms.BindingSource dataSet1BindingSource1;
         private System.Windows.Forms.BindingSource dataTable1BindingSource1;
+        private System.Windows.Forms.Button btnDefaultTag;
     }
 }
 
