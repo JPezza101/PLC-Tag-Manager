@@ -13,6 +13,9 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using System.Diagnostics;
+using libplctag.NativeImport;
+using System.Net.NetworkInformation;
+using System.Net;
 
 namespace Tag_Manager
 {
@@ -512,7 +515,7 @@ namespace Tag_Manager
 
 
         //STARTUP FUNCTIONS
-        public void CheckIP(string address)
+        public async void CheckIP(string address)
         {
             //Verify that the IP Address is an acceptable value
             string[] octets = new string[4];
@@ -520,7 +523,6 @@ namespace Tag_Manager
             octets = address.Split('.');
 
             ipConfig.IPValidated = false;
-            panIPAddr.BackColor = Color.Red;
 
             //Check that the IP address entered is exactly 4 octets (xxx.xxx.xxx.xxx) and parse each octet into an INT
             if (octets.Length == 4)
@@ -534,7 +536,22 @@ namespace Tag_Manager
                 if (address != "0.0.0.0" && (parsedOctets.Any(z => z <= 255) && parsedOctets.Any(z => z >= 0)))
                 {
                     ipConfig.IPValidated = true;
-                    panIPAddr.BackColor = Color.FromArgb(0, 225, 0);
+
+                    Ping ip = new Ping();
+                    PingReply reply = await ip.SendPingAsync(IPAddress.Parse(ipConfig.Gateway), 2000);
+
+                    if (reply.Status == IPStatus.Success)
+                    {
+                        panIPAddr.BackColor = Color.FromArgb(0, 225, 0);
+                        txtIPStatus.Text = "Connection Successful";
+                        createTagListToolStripMenuItem.Enabled = true;
+                    }
+                    else
+                    {
+                        panIPAddr.BackColor = Color.Red;
+                        txtIPStatus.Text = "Connection Failed";
+                        createTagListToolStripMenuItem.Enabled = false;
+                    }
                 }
             }
         }
@@ -751,6 +768,18 @@ namespace Tag_Manager
             Process.Start("https://github.com/JPezza101/PLC-Tag-Manager");
         }
 
+        private void createTagListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form2 f = new Form2(this);
+            f.Show();
+        }
+
+        private void deviceInfoToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 f = new Form3();
+            f.Show();
+        }
+
 
         //Input Events
 
@@ -775,6 +804,9 @@ namespace Tag_Manager
 
         private void inputIPAddr_Leave(object sender, EventArgs e)
         {
+            txtIPStatus.Text = "Checking...";
+            panIPAddr.BackColor = Color.Yellow;
+            createTagListToolStripMenuItem.Enabled = false;
             CheckIP(ipConfig.Gateway);
         }
 
@@ -894,12 +926,6 @@ namespace Tag_Manager
             dt.AcceptChanges();
         }
 
-        private void createTagListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Form2 f = new Form2(this);
-            f.Show();
-        }
-
         private void btnWriteChanges_Click(object sender, EventArgs e)
         {
             var writeCheck = MessageBox.Show("Are you sure you wish to write this new data to the PLC?\nThis cannot be undone.", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
@@ -944,5 +970,26 @@ namespace Tag_Manager
         {
             btnReadTags_Click(sender, e);
         }
+
+        private void txtCommProtocol_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtControllerType_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label6_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtTagType_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
     }
 }
