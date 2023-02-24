@@ -74,24 +74,24 @@
             this.btnCancelChanges = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new Tag_Manager.DataSet1();
-            this.dataSet1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.dataTable1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.btnDefaultTag = new System.Windows.Forms.Button();
             this.txtIPStatus = new System.Windows.Forms.Label();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createTagListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.deviceInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.iPBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new Tag_Manager.DataSet1();
+            this.dataSet1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.dataTable1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // dataGridView1
@@ -551,26 +551,6 @@
             this.dataTable1BindingSource.DataMember = "DataTable1";
             this.dataTable1BindingSource.DataSource = this.dataSet1BindingSource;
             // 
-            // dataSet1BindingSource
-            // 
-            this.dataSet1BindingSource.DataSource = this.dataSet1;
-            this.dataSet1BindingSource.Position = 0;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
-            // dataSet1BindingSource1
-            // 
-            this.dataSet1BindingSource1.DataSource = this.dataSet1;
-            this.dataSet1BindingSource1.Position = 0;
-            // 
-            // dataTable1BindingSource1
-            // 
-            this.dataTable1BindingSource1.DataMember = "DataTable1";
-            this.dataTable1BindingSource1.DataSource = this.dataSet1;
-            // 
             // btnDefaultTag
             // 
             this.btnDefaultTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -605,7 +585,7 @@
             // 
             this.createTagListToolStripMenuItem.Enabled = false;
             this.createTagListToolStripMenuItem.Name = "createTagListToolStripMenuItem";
-            this.createTagListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createTagListToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.createTagListToolStripMenuItem.Text = "View Tag List";
             this.createTagListToolStripMenuItem.ToolTipText = "Must have a valid IP connection\r\n";
             this.createTagListToolStripMenuItem.Click += new System.EventHandler(this.createTagListToolStripMenuItem_Click);
@@ -613,9 +593,29 @@
             // deviceInfoToolStripMenuItem
             // 
             this.deviceInfoToolStripMenuItem.Name = "deviceInfoToolStripMenuItem";
-            this.deviceInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.deviceInfoToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
             this.deviceInfoToolStripMenuItem.Text = "Device Info";
             this.deviceInfoToolStripMenuItem.Click += new System.EventHandler(this.deviceInfoToolStripMenuItem_Click);
+            // 
+            // dataSet1BindingSource
+            // 
+            this.dataSet1BindingSource.DataSource = this.dataSet1;
+            this.dataSet1BindingSource.Position = 0;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // dataSet1BindingSource1
+            // 
+            this.dataSet1BindingSource1.DataSource = this.dataSet1;
+            this.dataSet1BindingSource1.Position = 0;
+            // 
+            // dataTable1BindingSource1
+            // 
+            this.dataTable1BindingSource1.DataMember = "DataTable1";
+            this.dataTable1BindingSource1.DataSource = this.dataSet1;
             // 
             // Form1
             // 
@@ -667,11 +667,11 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
