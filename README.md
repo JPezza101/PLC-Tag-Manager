@@ -1,6 +1,6 @@
 # PLC-Tag-Manager
 
-The Tag Master 5000 is a state of the art, PLC tag managing application, designed to make the life of an AGR control systems individual just a little bit easier. With the ability to read and write just about any tag in the PLC (including user-defined type), gone are the days of needing an active -insert overpriced PLC software company here- software license to make minor edits to your systems man informational tags!
+The Tag Master 5000 is a state of the art PLC tag managing application, designed to make the life of an AGR control systems individual just a little bit easier. With the ability to read and write just about any tag in the PLC (including user-defined type), gone are the days of needing an active -insert overpriced PLC software company here- software license to make minor edits to your systems man informational tags!
 
 ## IP ADDRESS SETUP
 
