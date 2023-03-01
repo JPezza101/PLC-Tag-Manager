@@ -48,7 +48,6 @@
             this.btnSetDefaultIP = new System.Windows.Forms.Button();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.githubToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.aboutToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.ddlControllerType = new System.Windows.Forms.ComboBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
@@ -57,6 +56,8 @@
             this.btnReadTags = new System.Windows.Forms.Button();
             this.inputTagName = new System.Windows.Forms.TextBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.createTagListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.txtIPAddr = new System.Windows.Forms.Label();
             this.inputIPAddr = new System.Windows.Forms.TextBox();
             this.panIPAddr = new System.Windows.Forms.Panel();
@@ -74,22 +75,19 @@
             this.btnCancelChanges = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.btnDefaultTag = new System.Windows.Forms.Button();
-            this.txtIPStatus = new System.Windows.Forms.Label();
-            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.createTagListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.deviceInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.iPBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1 = new Tag_Manager.DataSet1();
+            this.btnDefaultTag = new System.Windows.Forms.Button();
+            this.txtIPStatus = new System.Windows.Forms.Label();
+            this.iPBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataTable1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -173,7 +171,7 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToolStripMenuItem.Text = "Clear Data";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -183,7 +181,7 @@
             this.csvToolStripMenuItem,
             this.xlsxToolStripMenuItem});
             this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
-            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToCSVToolStripMenuItem.Text = "Export to...";
             // 
             // csvToolStripMenuItem
@@ -203,7 +201,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -215,7 +213,6 @@
             this.txtTagType.Size = new System.Drawing.Size(154, 20);
             this.txtTagType.TabIndex = 45;
             this.txtTagType.TabStop = false;
-            this.txtTagType.TextChanged += new System.EventHandler(this.txtTagType_TextChanged);
             // 
             // txtTagDim2
             // 
@@ -266,8 +263,7 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.githubToolStripMenuItem,
-            this.aboutToolStripMenuItem1});
+            this.githubToolStripMenuItem});
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
             this.aboutToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
             this.aboutToolStripMenuItem.Text = "Help";
@@ -275,15 +271,9 @@
             // githubToolStripMenuItem
             // 
             this.githubToolStripMenuItem.Name = "githubToolStripMenuItem";
-            this.githubToolStripMenuItem.Size = new System.Drawing.Size(112, 22);
+            this.githubToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.githubToolStripMenuItem.Text = "GitHub";
             this.githubToolStripMenuItem.Click += new System.EventHandler(this.githubToolStripMenuItem_Click);
-            // 
-            // aboutToolStripMenuItem1
-            // 
-            this.aboutToolStripMenuItem1.Name = "aboutToolStripMenuItem1";
-            this.aboutToolStripMenuItem1.Size = new System.Drawing.Size(112, 22);
-            this.aboutToolStripMenuItem1.Text = "About";
             // 
             // ddlControllerType
             // 
@@ -381,6 +371,23 @@
             this.menuStrip1.TabIndex = 66;
             this.menuStrip1.Text = "menuStrip1";
             // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.createTagListToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // createTagListToolStripMenuItem
+            // 
+            this.createTagListToolStripMenuItem.Enabled = false;
+            this.createTagListToolStripMenuItem.Name = "createTagListToolStripMenuItem";
+            this.createTagListToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.createTagListToolStripMenuItem.Text = "View Tag List";
+            this.createTagListToolStripMenuItem.ToolTipText = "Must have a valid IP connection\r\n";
+            this.createTagListToolStripMenuItem.Click += new System.EventHandler(this.createTagListToolStripMenuItem_Click);
+            // 
             // txtIPAddr
             // 
             this.txtIPAddr.Font = new System.Drawing.Font("Segoe UI", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -473,7 +480,6 @@
             this.txtCommProtocol.TabIndex = 63;
             this.txtCommProtocol.Text = "Comm Type";
             this.txtCommProtocol.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.txtCommProtocol.Click += new System.EventHandler(this.txtCommProtocol_Click);
             // 
             // txtControllerType
             // 
@@ -484,7 +490,6 @@
             this.txtControllerType.TabIndex = 61;
             this.txtControllerType.Text = "Controller";
             this.txtControllerType.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.txtControllerType.Click += new System.EventHandler(this.txtControllerType_Click);
             // 
             // label6
             // 
@@ -496,7 +501,6 @@
             this.label6.TabIndex = 47;
             this.label6.Text = "Tag Datatype";
             this.label6.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
-            this.label6.Click += new System.EventHandler(this.label6_Click);
             // 
             // txtSlotNum
             // 
@@ -551,6 +555,16 @@
             this.dataTable1BindingSource.DataMember = "DataTable1";
             this.dataTable1BindingSource.DataSource = this.dataSet1BindingSource;
             // 
+            // dataSet1BindingSource
+            // 
+            this.dataSet1BindingSource.DataSource = this.dataSet1;
+            this.dataSet1BindingSource.Position = 0;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // btnDefaultTag
             // 
             this.btnDefaultTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -571,41 +585,6 @@
             this.txtIPStatus.Name = "txtIPStatus";
             this.txtIPStatus.Size = new System.Drawing.Size(0, 13);
             this.txtIPStatus.TabIndex = 71;
-            // 
-            // toolsToolStripMenuItem
-            // 
-            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.createTagListToolStripMenuItem,
-            this.deviceInfoToolStripMenuItem});
-            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
-            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
-            this.toolsToolStripMenuItem.Text = "Tools";
-            // 
-            // createTagListToolStripMenuItem
-            // 
-            this.createTagListToolStripMenuItem.Enabled = false;
-            this.createTagListToolStripMenuItem.Name = "createTagListToolStripMenuItem";
-            this.createTagListToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.createTagListToolStripMenuItem.Text = "View Tag List";
-            this.createTagListToolStripMenuItem.ToolTipText = "Must have a valid IP connection\r\n";
-            this.createTagListToolStripMenuItem.Click += new System.EventHandler(this.createTagListToolStripMenuItem_Click);
-            // 
-            // deviceInfoToolStripMenuItem
-            // 
-            this.deviceInfoToolStripMenuItem.Name = "deviceInfoToolStripMenuItem";
-            this.deviceInfoToolStripMenuItem.Size = new System.Drawing.Size(141, 22);
-            this.deviceInfoToolStripMenuItem.Text = "Device Info";
-            this.deviceInfoToolStripMenuItem.Click += new System.EventHandler(this.deviceInfoToolStripMenuItem_Click);
-            // 
-            // dataSet1BindingSource
-            // 
-            this.dataSet1BindingSource.DataSource = this.dataSet1;
-            this.dataSet1BindingSource.Position = 0;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // dataSet1BindingSource1
             // 
@@ -667,9 +646,9 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -698,7 +677,6 @@
         private System.Windows.Forms.Button btnSetDefaultIP;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem githubToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem1;
         private System.Windows.Forms.ComboBox ddlControllerType;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
@@ -733,7 +711,6 @@
         private System.Windows.Forms.Label txtIPStatus;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createTagListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem deviceInfoToolStripMenuItem;
     }
 }
 

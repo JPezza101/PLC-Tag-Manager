@@ -971,25 +971,5 @@ namespace Tag_Manager
             btnReadTags_Click(sender, e);
         }
 
-        private void txtCommProtocol_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtControllerType_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void label6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void txtTagType_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
     }
 }
