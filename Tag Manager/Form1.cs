@@ -543,13 +543,13 @@ namespace Tag_Manager
                     if (reply.Status == IPStatus.Success)
                     {
                         panIPAddr.BackColor = Color.FromArgb(0, 225, 0);
-                        txtIPStatus.Text = "Connection Successful";
+                        txtIPStatus.Text = "Device Found";
                         createTagListToolStripMenuItem.Enabled = true;
                     }
                     else
                     {
                         panIPAddr.BackColor = Color.Red;
-                        txtIPStatus.Text = "Connection Failed";
+                        txtIPStatus.Text = "Device Not Found";
                         createTagListToolStripMenuItem.Enabled = false;
                     }
                 }

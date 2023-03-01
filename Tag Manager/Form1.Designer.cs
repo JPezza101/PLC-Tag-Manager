@@ -583,8 +583,9 @@
             this.txtIPStatus.AutoSize = true;
             this.txtIPStatus.Location = new System.Drawing.Point(324, 42);
             this.txtIPStatus.Name = "txtIPStatus";
-            this.txtIPStatus.Size = new System.Drawing.Size(0, 13);
+            this.txtIPStatus.Size = new System.Drawing.Size(78, 13);
             this.txtIPStatus.TabIndex = 71;
+            this.txtIPStatus.Text = "No Device Selected";
             // 
             // dataSet1BindingSource1
             // 
@@ -639,7 +640,7 @@
             this.Controls.Add(this.label3);
             this.MinimumSize = new System.Drawing.Size(980, 350);
             this.Name = "Form1";
-            this.Text = "TAG MASTER 5000";
+            this.Text = "No Connection";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
