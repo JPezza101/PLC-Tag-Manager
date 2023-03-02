@@ -10,6 +10,7 @@ The Tag Master 5000 is a state of the art PLC tag managing application, designed
 
 ### PLANNED
 + A search function will be added to the Tag List screen to allow filtering of the tag list based on name.
++ Import existing excel file to download to tags.
 
 ---
 
