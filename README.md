@@ -7,6 +7,7 @@ The Tag Master 5000 is a state of the art PLC tag managing application, designed
 ## KNOWN ISSUES & EXPECTED UPDATES
 ### BUGS
 + Currently, the tag read function cannot read a UDT with a nested array (an array within the member list of the UDT itself). This is being looked into for a future update, but may take some time.
++ .CSV export sees first comma in tag name as delimiter for multidimensional arrays - 'Alarm_Message[0,0]'. Shifts each column one to the right.
 
 ### PLANNED
 + A search function will be added to the Tag List screen to allow filtering of the tag list based on name.
