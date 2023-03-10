@@ -75,19 +75,21 @@
             this.btnCancelChanges = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             this.dataTable1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.dataSet1 = new Tag_Manager.DataSet1();
             this.btnDefaultTag = new System.Windows.Forms.Button();
             this.txtIPStatus = new System.Windows.Forms.Label();
             this.iPBindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1BindingSource = new System.Windows.Forms.BindingSource(this.components);
-            this.dataSet1 = new Tag_Manager.DataSet1();
             this.dataSet1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataTable1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.importFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xlsxToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -162,6 +164,7 @@
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.exportToolStripMenuItem,
+            this.importFromToolStripMenuItem,
             this.exportToCSVToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
@@ -171,7 +174,7 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToolStripMenuItem.Text = "Clear Data";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -181,27 +184,27 @@
             this.csvToolStripMenuItem,
             this.xlsxToolStripMenuItem});
             this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
-            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToCSVToolStripMenuItem.Text = "Export to...";
             // 
             // csvToolStripMenuItem
             // 
             this.csvToolStripMenuItem.Name = "csvToolStripMenuItem";
-            this.csvToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.csvToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.csvToolStripMenuItem.Text = ".csv";
             this.csvToolStripMenuItem.Click += new System.EventHandler(this.csvToolStripMenuItem_Click);
             // 
             // xlsxToolStripMenuItem
             // 
             this.xlsxToolStripMenuItem.Name = "xlsxToolStripMenuItem";
-            this.xlsxToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.xlsxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.xlsxToolStripMenuItem.Text = ".xlsx";
             this.xlsxToolStripMenuItem.Click += new System.EventHandler(this.xlsxToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(131, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -555,6 +558,16 @@
             this.dataTable1BindingSource.DataMember = "DataTable1";
             this.dataTable1BindingSource.DataSource = this.dataSet1BindingSource;
             // 
+            // dataSet1BindingSource
+            // 
+            this.dataSet1BindingSource.DataSource = this.dataSet1;
+            this.dataSet1BindingSource.Position = 0;
+            // 
+            // dataSet1
+            // 
+            this.dataSet1.DataSetName = "DataSet1";
+            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
             // btnDefaultTag
             // 
             this.btnDefaultTag.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
@@ -577,16 +590,6 @@
             this.txtIPStatus.TabIndex = 71;
             this.txtIPStatus.Text = "No Device Selected";
             // 
-            // dataSet1BindingSource
-            // 
-            this.dataSet1BindingSource.DataSource = this.dataSet1;
-            this.dataSet1BindingSource.Position = 0;
-            // 
-            // dataSet1
-            // 
-            this.dataSet1.DataSetName = "DataSet1";
-            this.dataSet1.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
-            // 
             // dataSet1BindingSource1
             // 
             this.dataSet1BindingSource1.DataSource = this.dataSet1;
@@ -596,6 +599,21 @@
             // 
             this.dataTable1BindingSource1.DataMember = "DataTable1";
             this.dataTable1BindingSource1.DataSource = this.dataSet1;
+            // 
+            // importFromToolStripMenuItem
+            // 
+            this.importFromToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xlsxToolStripMenuItem1});
+            this.importFromToolStripMenuItem.Name = "importFromToolStripMenuItem";
+            this.importFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.importFromToolStripMenuItem.Text = "Import from...";
+            // 
+            // xlsxToolStripMenuItem1
+            // 
+            this.xlsxToolStripMenuItem1.Name = "xlsxToolStripMenuItem1";
+            this.xlsxToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.xlsxToolStripMenuItem1.Text = ".xlsx";
+            this.xlsxToolStripMenuItem1.Click += new System.EventHandler(this.xlsxToolStripMenuItem1_Click);
             // 
             // Form1
             // 
@@ -647,9 +665,9 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.iPBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataSet1BindingSource1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource1)).EndInit();
             this.ResumeLayout(false);
@@ -712,6 +730,8 @@
         private System.Windows.Forms.Label txtIPStatus;
         private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem createTagListToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem importFromToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem xlsxToolStripMenuItem1;
     }
 }
 

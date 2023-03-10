@@ -30,6 +30,8 @@
         {
             this.btnSelectTag = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
+            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.treeView2 = new System.Windows.Forms.TreeView();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
@@ -57,11 +59,30 @@
             this.button2.UseVisualStyleBackColor = true;
             this.button2.Click += new System.EventHandler(this.button2_Click);
             // 
+            // textBox1
+            // 
+            this.textBox1.ForeColor = System.Drawing.Color.Gray;
+            this.textBox1.Location = new System.Drawing.Point(12, 12);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.Size = new System.Drawing.Size(387, 20);
+            this.textBox1.TabIndex = 50;
+            this.textBox1.Text = "Search tags...";
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
+            this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
+            // 
+            // treeView2
+            // 
+            this.treeView2.Location = new System.Drawing.Point(13, 38);
+            this.treeView2.Name = "treeView2";
+            this.treeView2.Size = new System.Drawing.Size(386, 524);
+            this.treeView2.TabIndex = 51;
+            // 
             // treeView1
             // 
-            this.treeView1.Location = new System.Drawing.Point(12, 12);
+            this.treeView1.Location = new System.Drawing.Point(13, 38);
             this.treeView1.Name = "treeView1";
-            this.treeView1.Size = new System.Drawing.Size(387, 550);
+            this.treeView1.Size = new System.Drawing.Size(386, 524);
             this.treeView1.TabIndex = 49;
             this.treeView1.DoubleClick += new System.EventHandler(this.treeView1_DoubleClick);
             // 
@@ -70,20 +91,25 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(412, 645);
+            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSelectTag);
             this.Controls.Add(this.treeView1);
+            this.Controls.Add(this.treeView2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form2";
             this.Text = "Tag List";
             this.Load += new System.EventHandler(this.Form2_Load);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.Button btnSelectTag;
         private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.TextBox textBox1;
+        protected System.Windows.Forms.TreeView treeView2;
         protected System.Windows.Forms.TreeView treeView1;
     }
 }

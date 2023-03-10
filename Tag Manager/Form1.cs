@@ -16,6 +16,8 @@ using System.Diagnostics;
 using libplctag.NativeImport;
 using System.Net.NetworkInformation;
 using System.Net;
+using System.Web.UI.Design.WebControls;
+using IronXL;
 
 namespace Tag_Manager
 {
@@ -971,5 +973,23 @@ namespace Tag_Manager
             btnReadTags_Click(sender, e);
         }
 
+        private void xlsxToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Excel Spreadsheet (*.xlsx;*.xlsm)|*.xlsx;*.xlsm";
+            ofd.FilterIndex = 0;
+
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string mFileName = ofd.FileName;
+
+                WorkBook workbook = WorkBook.Load(mFileName);
+                WorkSheet worksheet = workbook.DefaultWorkSheet;
+
+                System.Data.DataTable dt = worksheet.ToDataTable();
+                System.Data.DataTable newDT = new System.Data.DataTable();
+
+            }
+        }
     }
 }

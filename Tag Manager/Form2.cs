@@ -14,6 +14,8 @@ namespace Tag_Manager
     public partial class Form2 : Form
     {
         Form1 mainForm;
+        TreeView unfilteredTagList = new TreeView();
+
         public Form2(Form1 incomingForm)
         {
             mainForm = incomingForm;
@@ -34,6 +36,7 @@ namespace Tag_Manager
                     if (nonTagIndicator == "Program")
                     {
                         treeView1.Nodes.Add(tag.Name);
+                        unfilteredTagList.Nodes.Add(tag.Name);
 
                         var programTags = Mappers.ReadProgramTagInfo(tag.Name);
                         foreach (var subtag in programTags)
@@ -41,6 +44,7 @@ namespace Tag_Manager
                             if (!subtag.Name.Contains(':'))
                             {
                                 treeView1.Nodes[treeView1.GetNodeCount(false) - 1].Nodes.Add(tag.Name + '.' + subtag.Name);
+                                unfilteredTagList.Nodes[treeView1.GetNodeCount(false) - 1].Nodes.Add(tag.Name + "." + subtag.Name);
                             }
                         }
                     }
@@ -48,6 +52,7 @@ namespace Tag_Manager
                 else
                 {
                     treeView1.Nodes.Add(tag.Name);
+                    unfilteredTagList.Nodes.Add(tag.Name);
                 }
             }
             treeView1.Sort();
@@ -80,6 +85,44 @@ namespace Tag_Manager
             mainForm.enteredTagName = treeView1.SelectedNode.Text;
             mainForm.populateFormSelectedTag();
             this.Close();
+        }
+
+        private void textBox1_Enter(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "Search tags...")
+            {
+                textBox1.Text = "";
+                textBox1.ForeColor = Color.Black;
+            }
+        }
+
+        private void textBox1_Leave(object sender, EventArgs e)
+        {
+            if (textBox1.Text == "")
+            {
+                textBox1.Text = "Search tags...";
+                textBox1.ForeColor = Color.Gray;
+                foreach (TreeNode node in unfilteredTagList.Nodes)
+                {
+                    treeView1.Nodes.Add(node.Text);
+                }
+            }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox1.Text != string.Empty || textBox1.Text != "")
+            {
+                treeView1.Nodes.Clear();
+
+                foreach (TreeNode node in unfilteredTagList.Nodes)
+                {
+                    if (node.Text.ToLower().Contains(textBox1.Text.ToLower()))
+                    {
+                        treeView1.Nodes.Add(node.Text);
+                    }
+                }
+            }            
         }
     }
 }
