@@ -10,8 +10,9 @@ The Tag Master 5000 is a state of the art PLC tag managing application, designed
 + .CSV export sees first comma in tag name as delimiter for multidimensional arrays - 'Alarm_Message[0,0]'. Shifts each column one to the right.
 
 ### PLANNED
-+ ~~A search function will be added to the Tag List screen to allow filtering of the tag list based on name.~~ Added 03/10/23
++ A search function will be added to the Tag List screen to allow filtering of the tag list based on name. (In Progress)
 + Import existing excel file to download to tags.
++ Change read functions to asynchronous to prevent application from freezing up when reading large tags.
 
 ---
 
