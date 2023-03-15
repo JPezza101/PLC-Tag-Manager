@@ -37,6 +37,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.importFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.xlsxToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.csvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xlsxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -82,8 +84,7 @@
             this.iPBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataSet1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
             this.dataTable1BindingSource1 = new System.Windows.Forms.BindingSource(this.components);
-            this.importFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.xlsxToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.txtLoadingOverlay = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.menuStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataTable1BindingSource)).BeginInit();
@@ -174,9 +175,24 @@
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.exportToolStripMenuItem.Text = "Clear Data";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // importFromToolStripMenuItem
+            // 
+            this.importFromToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.xlsxToolStripMenuItem1});
+            this.importFromToolStripMenuItem.Name = "importFromToolStripMenuItem";
+            this.importFromToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.importFromToolStripMenuItem.Text = "Import from...";
+            // 
+            // xlsxToolStripMenuItem1
+            // 
+            this.xlsxToolStripMenuItem1.Name = "xlsxToolStripMenuItem1";
+            this.xlsxToolStripMenuItem1.Size = new System.Drawing.Size(97, 22);
+            this.xlsxToolStripMenuItem1.Text = ".xlsx";
+            this.xlsxToolStripMenuItem1.Click += new System.EventHandler(this.xlsxToolStripMenuItem1_Click);
             // 
             // exportToCSVToolStripMenuItem
             // 
@@ -184,27 +200,27 @@
             this.csvToolStripMenuItem,
             this.xlsxToolStripMenuItem});
             this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
-            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.exportToCSVToolStripMenuItem.Text = "Export to...";
             // 
             // csvToolStripMenuItem
             // 
             this.csvToolStripMenuItem.Name = "csvToolStripMenuItem";
-            this.csvToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.csvToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.csvToolStripMenuItem.Text = ".csv";
             this.csvToolStripMenuItem.Click += new System.EventHandler(this.csvToolStripMenuItem_Click);
             // 
             // xlsxToolStripMenuItem
             // 
             this.xlsxToolStripMenuItem.Name = "xlsxToolStripMenuItem";
-            this.xlsxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.xlsxToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
             this.xlsxToolStripMenuItem.Text = ".xlsx";
             this.xlsxToolStripMenuItem.Click += new System.EventHandler(this.xlsxToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -600,26 +616,24 @@
             this.dataTable1BindingSource1.DataMember = "DataTable1";
             this.dataTable1BindingSource1.DataSource = this.dataSet1;
             // 
-            // importFromToolStripMenuItem
+            // txtLoadingOverlay
             // 
-            this.importFromToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.xlsxToolStripMenuItem1});
-            this.importFromToolStripMenuItem.Name = "importFromToolStripMenuItem";
-            this.importFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.importFromToolStripMenuItem.Text = "Import from...";
-            // 
-            // xlsxToolStripMenuItem1
-            // 
-            this.xlsxToolStripMenuItem1.Name = "xlsxToolStripMenuItem1";
-            this.xlsxToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
-            this.xlsxToolStripMenuItem1.Text = ".xlsx";
-            this.xlsxToolStripMenuItem1.Click += new System.EventHandler(this.xlsxToolStripMenuItem1_Click);
+            this.txtLoadingOverlay.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.txtLoadingOverlay.AutoSize = true;
+            this.txtLoadingOverlay.Font = new System.Drawing.Font("Microsoft Sans Serif", 16F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtLoadingOverlay.Location = new System.Drawing.Point(432, 395);
+            this.txtLoadingOverlay.Name = "txtLoadingOverlay";
+            this.txtLoadingOverlay.Size = new System.Drawing.Size(231, 26);
+            this.txtLoadingOverlay.TabIndex = 72;
+            this.txtLoadingOverlay.Text = "Loading. Please wait...";
+            this.txtLoadingOverlay.Visible = false;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1226, 646);
+            this.Controls.Add(this.txtLoadingOverlay);
             this.Controls.Add(this.txtIPStatus);
             this.Controls.Add(this.btnDefaultTag);
             this.Controls.Add(this.btnCancelChanges);
@@ -732,6 +746,7 @@
         private System.Windows.Forms.ToolStripMenuItem createTagListToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem importFromToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xlsxToolStripMenuItem1;
+        private System.Windows.Forms.Label txtLoadingOverlay;
     }
 }
 

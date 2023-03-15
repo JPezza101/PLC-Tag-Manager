@@ -47,7 +47,7 @@ namespace Tag_Manager
         }
 
         //GRID POPULATE FUNCTIONS
-        private void WriteTagData()
+        private bool WriteTagData()
         {
             //If the first index is > than zero, this is at least a 1D array
             if (arrayDims[0] > 0)
@@ -70,7 +70,7 @@ namespace Tag_Manager
                                     {
                                         data.Add(CreateTagNameString(new int[] { i, j, k }));
                                         data.Add(ReadSingleTag(enteredTagName, i, j, k));
-                                        
+
                                     }
                                     else
                                     {
@@ -156,6 +156,7 @@ namespace Tag_Manager
                 }
                 dt.Rows.Add(data.ToArray());
             }
+            return true;
         }
 
         private string ReadSingleTag(string name, int i = 0, int j = 0, int k = 0, string member = null)
@@ -782,6 +783,20 @@ namespace Tag_Manager
             f.Show();
         }
 
+        private void toggleUserControlsEnabled()
+        {
+            inputIPAddr.Enabled = !inputIPAddr.Enabled;
+            inputRackNum.Enabled = !inputRackNum.Enabled;
+            inputSlotNum.Enabled = !inputSlotNum.Enabled;
+            ddlControllerType.Enabled = !ddlControllerType.Enabled;
+            ddlCommProtocol.Enabled = !ddlCommProtocol.Enabled;
+
+            btnRestoreDefaultIP.Enabled = !btnRestoreDefaultIP.Enabled;
+            btnSetDefaultIP.Enabled = !btnSetDefaultIP.Enabled;
+
+            inputTagName.Enabled = !inputTagName.Enabled;
+            btnReadTags.Enabled = !btnReadTags.Enabled;
+        }
 
         //Input Events
 
@@ -912,7 +927,7 @@ namespace Tag_Manager
             
         }
 
-        private void btnReadTags_Click(object sender, EventArgs e)
+        private async void btnReadTags_Click(object sender, EventArgs e)
         {
             //Clear all lists with every new Read request
             udtMemberNamesList.Clear();
@@ -921,11 +936,22 @@ namespace Tag_Manager
             dt.Columns.Clear();
             dt.Clear();
 
+            //Begin writing process
             PrintTagInfo();
             WriteColumnHeaders();
-            WriteTagData();
 
-            dt.AcceptChanges();
+            //While tags data is loading, display 'Loading' splash, disable all input controls that would change the tag info
+            txtLoadingOverlay.Visible = true;
+            toggleUserControlsEnabled();
+            Task<bool> writeTags = Task.Run(() => WriteTagData());
+            bool writeComplete = await writeTags;
+
+            if (writeComplete)
+            {
+                txtLoadingOverlay.Visible = false;
+                dt.AcceptChanges();
+                toggleUserControlsEnabled();
+            }
         }
 
         private void btnWriteChanges_Click(object sender, EventArgs e)
