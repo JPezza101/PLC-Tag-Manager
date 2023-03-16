@@ -36,10 +36,10 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.clearToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.importFromToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xlsxToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
-            this.exportToCSVToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exportToToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.csvToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.xlsxToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -164,63 +164,63 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem,
+            this.clearToolStripMenuItem,
             this.importFromToolStripMenuItem,
-            this.exportToCSVToolStripMenuItem,
+            this.exportToToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
-            // exportToolStripMenuItem
+            // clearToolStripMenuItem
             // 
-            this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.exportToolStripMenuItem.Text = "Clear Data";
-            this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            this.clearToolStripMenuItem.Name = "clearToolStripMenuItem";
+            this.clearToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.clearToolStripMenuItem.Text = "Clear Data";
+            this.clearToolStripMenuItem.Click += new System.EventHandler(this.clearToolStripMenuItem_Click);
             // 
             // importFromToolStripMenuItem
             // 
             this.importFromToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.xlsxToolStripMenuItem1});
             this.importFromToolStripMenuItem.Name = "importFromToolStripMenuItem";
-            this.importFromToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.importFromToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.importFromToolStripMenuItem.Text = "Import from...";
             // 
             // xlsxToolStripMenuItem1
             // 
             this.xlsxToolStripMenuItem1.Name = "xlsxToolStripMenuItem1";
-            this.xlsxToolStripMenuItem1.Size = new System.Drawing.Size(97, 22);
+            this.xlsxToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
             this.xlsxToolStripMenuItem1.Text = ".xlsx";
             this.xlsxToolStripMenuItem1.Click += new System.EventHandler(this.xlsxToolStripMenuItem1_Click);
             // 
-            // exportToCSVToolStripMenuItem
+            // exportToToolStripMenuItem
             // 
-            this.exportToCSVToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.csvToolStripMenuItem,
             this.xlsxToolStripMenuItem});
-            this.exportToCSVToolStripMenuItem.Name = "exportToCSVToolStripMenuItem";
-            this.exportToCSVToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
-            this.exportToCSVToolStripMenuItem.Text = "Export to...";
+            this.exportToToolStripMenuItem.Name = "exportToToolStripMenuItem";
+            this.exportToToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToToolStripMenuItem.Text = "Export to...";
             // 
             // csvToolStripMenuItem
             // 
             this.csvToolStripMenuItem.Name = "csvToolStripMenuItem";
-            this.csvToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.csvToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.csvToolStripMenuItem.Text = ".csv";
             this.csvToolStripMenuItem.Click += new System.EventHandler(this.csvToolStripMenuItem_Click);
             // 
             // xlsxToolStripMenuItem
             // 
             this.xlsxToolStripMenuItem.Name = "xlsxToolStripMenuItem";
-            this.xlsxToolStripMenuItem.Size = new System.Drawing.Size(97, 22);
+            this.xlsxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.xlsxToolStripMenuItem.Text = ".xlsx";
             this.xlsxToolStripMenuItem.Click += new System.EventHandler(this.xlsxToolStripMenuItem_Click);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(148, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -698,8 +698,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem exportToCSVToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem clearToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem exportToToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem csvToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem xlsxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;

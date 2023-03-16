@@ -669,7 +669,7 @@ namespace Tag_Manager
             }
         }
 
-        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        private void clearToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var clearAll = MessageBox.Show("Are you sure you wish to clear all data from this list?", "Confirm", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
             if (clearAll == DialogResult.Yes)
@@ -796,6 +796,10 @@ namespace Tag_Manager
 
             inputTagName.Enabled = !inputTagName.Enabled;
             btnReadTags.Enabled = !btnReadTags.Enabled;
+
+            clearToolStripMenuItem.Enabled = !clearToolStripMenuItem.Enabled;
+            importFromToolStripMenuItem.Enabled = !importFromToolStripMenuItem.Enabled;
+            exportToToolStripMenuItem.Enabled = !exportToToolStripMenuItem.Enabled;
         }
 
         //Input Events

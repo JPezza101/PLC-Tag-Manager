@@ -31,7 +31,6 @@
             this.btnSelectTag = new System.Windows.Forms.Button();
             this.button2 = new System.Windows.Forms.Button();
             this.textBox1 = new System.Windows.Forms.TextBox();
-            this.treeView2 = new System.Windows.Forms.TreeView();
             this.treeView1 = new System.Windows.Forms.TreeView();
             this.SuspendLayout();
             // 
@@ -71,13 +70,6 @@
             this.textBox1.Enter += new System.EventHandler(this.textBox1_Enter);
             this.textBox1.Leave += new System.EventHandler(this.textBox1_Leave);
             // 
-            // treeView2
-            // 
-            this.treeView2.Location = new System.Drawing.Point(13, 38);
-            this.treeView2.Name = "treeView2";
-            this.treeView2.Size = new System.Drawing.Size(386, 524);
-            this.treeView2.TabIndex = 51;
-            // 
             // treeView1
             // 
             this.treeView1.Location = new System.Drawing.Point(13, 38);
@@ -95,7 +87,6 @@
             this.Controls.Add(this.button2);
             this.Controls.Add(this.btnSelectTag);
             this.Controls.Add(this.treeView1);
-            this.Controls.Add(this.treeView2);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "Form2";
             this.Text = "Tag List";
@@ -109,7 +100,6 @@
         private System.Windows.Forms.Button btnSelectTag;
         private System.Windows.Forms.Button button2;
         private System.Windows.Forms.TextBox textBox1;
-        protected System.Windows.Forms.TreeView treeView2;
         protected System.Windows.Forms.TreeView treeView1;
     }
 }

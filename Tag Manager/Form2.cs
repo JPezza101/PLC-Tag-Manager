@@ -1,10 +1,12 @@
 ﻿using libplctag.DataTypes;
+using Microsoft.Office.Interop.Excel;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,6 +16,7 @@ namespace Tag_Manager
     public partial class Form2 : Form
     {
         Form1 mainForm;
+
         TreeView unfilteredTagList = new TreeView();
 
         public Form2(Form1 incomingForm)
@@ -36,7 +39,6 @@ namespace Tag_Manager
                     if (nonTagIndicator == "Program")
                     {
                         treeView1.Nodes.Add(tag.Name);
-                        unfilteredTagList.Nodes.Add(tag.Name);
 
                         var programTags = Mappers.ReadProgramTagInfo(tag.Name);
                         foreach (var subtag in programTags)
@@ -44,7 +46,6 @@ namespace Tag_Manager
                             if (!subtag.Name.Contains(':'))
                             {
                                 treeView1.Nodes[treeView1.GetNodeCount(false) - 1].Nodes.Add(tag.Name + '.' + subtag.Name);
-                                unfilteredTagList.Nodes[treeView1.GetNodeCount(false) - 1].Nodes.Add(tag.Name + "." + subtag.Name);
                             }
                         }
                     }
@@ -52,15 +53,23 @@ namespace Tag_Manager
                 else
                 {
                     treeView1.Nodes.Add(tag.Name);
-                    unfilteredTagList.Nodes.Add(tag.Name);
                 }
             }
             treeView1.Sort();
+
+            //Copy tag list into a backup TreeView to refresh complete list without rescanning tags
+            foreach (TreeNode node in treeView1.Nodes)
+            {
+                unfilteredTagList.Nodes.Add((TreeNode)node.Clone());
+            }
+
         }
+        public delegate void FunctionDelegate();
 
         private void Form2_Load(object sender, EventArgs e)
         {
-            LoadTagList();
+            treeView1.BeginInvoke(new FunctionDelegate(LoadTagList));
+
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -98,31 +107,56 @@ namespace Tag_Manager
 
         private void textBox1_Leave(object sender, EventArgs e)
         {
-            if (textBox1.Text == "")
+            if (textBox1.Text == "" || textBox1.Text == string.Empty)
             {
                 textBox1.Text = "Search tags...";
                 textBox1.ForeColor = Color.Gray;
-                foreach (TreeNode node in unfilteredTagList.Nodes)
-                {
-                    treeView1.Nodes.Add(node.Text);
-                }
             }
         }
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (textBox1.Text != string.Empty || textBox1.Text != "")
+            if (textBox1.Text != string.Empty && textBox1.Text != "" && textBox1.Text != "Search tags...")
             {
                 treeView1.Nodes.Clear();
 
-                foreach (TreeNode node in unfilteredTagList.Nodes)
+                for (int i = 0; i < unfilteredTagList.GetNodeCount(false); i++)
                 {
-                    if (node.Text.ToLower().Contains(textBox1.Text.ToLower()))
+                    if (unfilteredTagList.Nodes[i].ToString().Contains("Program:"))
                     {
-                        treeView1.Nodes.Add(node.Text);
+                        bool parentNodeAdded = false;
+                        for (int j = 0; j < unfilteredTagList.Nodes[i].GetNodeCount(false); j++)
+                        {
+                            string nodeString = unfilteredTagList.Nodes[i].Nodes[j].Text;
+                            string nodeSubstring = nodeString.Substring(nodeString.LastIndexOf('.') + 1);
+                            if (nodeSubstring.ToLower().Contains(textBox1.Text.ToLower()))
+                            {
+                                if (!parentNodeAdded)
+                                {
+                                    treeView1.Nodes.Add(unfilteredTagList.Nodes[i].Text);
+                                    parentNodeAdded = true;
+                                }
+                                treeView1.Nodes[treeView1.GetNodeCount(false) - 1].Nodes.Add((TreeNode)unfilteredTagList.Nodes[i].Nodes[j].Clone());
+                            }
+                        }
+                    }
+                    else
+                    {
+                        if (unfilteredTagList.Nodes[i].ToString().ToLower().Contains(textBox1.Text.ToLower()))
+                        {
+                            treeView1.Nodes.Add((TreeNode)unfilteredTagList.Nodes[i].Clone());
+                        }
                     }
                 }
-            }            
+            }
+            else
+            {
+                treeView1.Nodes.Clear();
+                foreach (TreeNode node in unfilteredTagList.Nodes)
+                {
+                    treeView1.Nodes.Add((TreeNode)node.Clone());
+                }
+            }
         }
     }
 }

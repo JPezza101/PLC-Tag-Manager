@@ -23,5 +23,8 @@
     <Setting Name="lastTagEntered" Type="System.String" Scope="User">
       <Value Profile="(Default)">Test_1D_DINTS</Value>
     </Setting>
+    <Setting Name="False" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
